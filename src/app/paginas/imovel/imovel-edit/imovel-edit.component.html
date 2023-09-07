@@ -1,0 +1,149 @@
+<h2 mat-dialog-title> {{estadoFormulario}} Imóvel </h2>
+<mat-dialog-content>
+
+    <form [formGroup]="productForm" *ngIf="productForm">
+        <div class="product-container">
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Propietario Contato</mat-label>
+                <input matInput formControlName="proprietarioMaster" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:25% !important; padding: 1%">
+                <mat-label>C.E.P.</mat-label>
+                <input matInput formControlName="cep" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Logradouro</mat-label>
+                <input matInput formControlName="logradouro" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:20% !important; padding: 1%">
+                <mat-label>Numero</mat-label>
+                <input matInput formControlName="numero" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:15% !important; padding: 0.5%">
+              <mat-label>Condominio</mat-label>
+              <mat-select [value]="condomi">
+                  <mat-option [value]="0">Não</mat-option>
+                  <mat-option [value]="1">Sim</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Complemento do Endereço</mat-label>
+                <input matInput formControlName="complementoImovel" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Bairro</mat-label>
+                <input matInput formControlName="bairro" required />
+            </mat-form-field>
+
+            <div formGroupName="cidade">
+
+                <mat-form-field style="width:48% !important; padding: 1%">
+                    <mat-label>Estado</mat-label>
+
+                    <mat-select [compareWith]="compareObjects" formControlName="uf" (selectionChange)="ufChange($event)">
+                        <mat-option  *ngFor="let select of estadosUf" [value]="select.descr">
+                            {{select.descr}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width:48% !important; padding: 1%">
+                    <mat-label>Cidades</mat-label>
+                    <mat-select [compareWith]="compareObjects" formControlName="id">
+                        <mat-option *ngFor="let option of cidadesUf" [value]="option.id">
+                            {{option.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <mat-form-field style="width:17% !important; padding: 0.5%">
+                <mat-label>Matricula</mat-label>
+                <input matInput formControlName="matricula" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:20% !important; padding: 0.5%">
+                <mat-label>Tipo Imovel</mat-label>
+                <mat-select formControlName="tipoImovel">
+                    <mat-option *ngFor="let option of tiposImv" [value]="option.descr">
+                        {{option.descr}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width:20% !important; padding: 0.5%">
+                <mat-label>Edificação</mat-label>
+                <mat-select formControlName="tipoEdificacao">
+                    <mat-option *ngFor="let option of tiposEdv" [value]="option.descr">
+                        {{option.descr}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width:19% !important; padding: 0.5%">
+                <mat-label>Tipo Serviço</mat-label>
+                <mat-select formControlName="tipoServico">
+                    <mat-option *ngFor="let option of tiposSrv" [value]="option.descr">
+                        {{option.descr}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field >
+
+            <mat-form-field style="width:19% !important; padding: 0.5%">
+                <mat-label>Construção Mts</mat-label>
+                <input matInput formControlName="areaConstruida" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:16% !important; padding: 0.5%">
+                <mat-label>Area Total Mts</mat-label>
+                <input matInput formControlName="areaTotal" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:16% !important; padding: 0.5%">
+                <mat-label>Banheiros</mat-label>
+                <input matInput formControlName="banheiros" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:16% !important; padding: 0.5%">
+                <mat-label>Quartos</mat-label>
+                <input matInput formControlName="quartos" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:16% !important; padding: 0.5%">
+                <mat-label>Suites</mat-label>
+                <input matInput formControlName="suites" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:15% !important; padding: 0.5%">
+                <mat-label>Comodos</mat-label>
+                <input matInput formControlName="comodos" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:15% !important; padding: 0.5%">
+                <mat-label>Vagas</mat-label>
+                <input matInput formControlName="vagas" required />
+            </mat-form-field>
+<!--
+            <mat-form-field style="width:83% !important;">
+                <mat-label>Observação</mat-label>
+                <input matInput formControlName="observacao" required />
+            </mat-form-field>
+-->
+            <div>
+                <!--button style="width:24%;" mat-stroked-button color="primary" (click)="openDialogEndereco()">Endereço</button-->
+                <button style="width:25%;" mat-stroked-button color="primary" (click)="openDialogProprietario()">Proprietarios</button>
+                <button style="width:24%;" mat-stroked-button color="primary" (click)="onSave(productForm)">Salvar</button>
+                <button style="width:25%;" mat-stroked-button color="primary" (click)="onCancel()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>

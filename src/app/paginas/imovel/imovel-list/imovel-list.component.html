@@ -1,0 +1,108 @@
+<mat-card>
+
+  <h2 class="alinhar">Lista de Imóveis</h2>
+
+  <mat-card-header>
+      <div>
+          <mat-form-field hintLabel="Pesquisa imóvel" appearance="fill">
+              <mat-label>Pesquisa</mat-label>
+              <input matInput #input (keyup)="buscar($event)">
+          </mat-form-field>
+      </div>
+  </mat-card-header>
+
+  <mat-card-header>
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+          <ul fxLayout="row" fxLayoutGap="20px">
+              <li>
+                  <button mat-raised-button color="primary" (click)="openDialog()">Novo Imóvel</button>
+              </li>
+          </ul>
+      </div>
+  </mat-card-header>
+
+  <div mat-card-image></div>
+
+  <mat-card-content>
+      <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endereco">
+              <th mat-header-cell *matHeaderCellDef> Endereço </th>
+              <td mat-cell *matCellDef="let element"> {{element.logradouro}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef> Num. </th>
+              <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef> Tipo </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipoImovel}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edificacao">
+              <th mat-header-cell *matHeaderCellDef> Edificação </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipoEdificacao}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="servico">
+              <th mat-header-cell *matHeaderCellDef> Serviço </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipoServico}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quartos">
+              <th mat-header-cell *matHeaderCellDef> Quartos </th>
+              <td mat-cell *matCellDef="let element"> {{element.quartos}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="suites">
+              <th mat-header-cell *matHeaderCellDef> Suites </th>
+              <td mat-cell *matCellDef="let element"> {{element.suites}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="banheiros">
+              <th mat-header-cell *matHeaderCellDef> Banheiros </th>
+              <td mat-cell *matCellDef="let element"> {{element.banheiros}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vagas">
+              <th mat-header-cell *matHeaderCellDef> Vagas </th>
+              <td mat-cell *matCellDef="let element"> {{element.vagas}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acoes">
+              <th mat-header-cell *matHeaderCellDef> Açoes </th>
+              <td mat-cell *matCellDef="let element">
+                  <button>
+                      <i class="material-icons dehaze" matTooltip="Ver Imóvel">dehaze</i>
+                  </button>
+                  <button (click)="edit(element.id)" matTooltip="Alterar Imóvel">
+                      <i class="material-icons edit">edit</i>
+                  </button>
+                  <button (click)="delete(element.id)" matTooltip="Excluir Imóvel">
+                      <i class="material-icons delete">delete</i>
+                  </button>
+                  <button matTooltip="Proprietarios" (click)="dialogProprietario(element.id)"> <!--[routerLink]="['/proprietario']"-->
+                      <i class="material-icons delete">face</i>
+                  </button>
+              </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+  </mat-card-content>
+
+
+</mat-card>

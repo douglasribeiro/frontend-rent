@@ -1,0 +1,62 @@
+.container {
+  width: 40%;
+  margin: auto;
+  padding: 1rem;
+  border-radius: .6rem;
+}
+
+.fullWidth {
+  width: 100%;
+  margin-bottom: .3rem;
+}
+
+.midWidth {
+  width: 45%;
+  margin-right: .5rem;
+  margin-bottom: .3rem;
+}
+
+.treeWidth {
+  width: 32%;
+  margin-right: .5rem;
+  margin-bottom: .3rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  height: 5rem;
+  margin: auto;
+}
+
+.margin {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section {
+  margin-bottom: .5rem;
+  display: flex;
+}
+
+button {
+  margin-top: .5rem;
+}
+
+mat-icon {
+  opacity: .8;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+div.tres {
+  position: absolute;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+
+}
