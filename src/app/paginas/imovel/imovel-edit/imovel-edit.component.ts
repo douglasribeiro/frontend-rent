@@ -98,7 +98,7 @@ export class ImovelEditComponent implements OnInit {
         this.imovelLocalizado = response;
         this.productForm = this.fb.group({
           proprietarioMaster: [response.proprietarioMaster, Validators.required],
-          matricula: [response.registro, Validators.required],
+          registro: [response.registro, Validators.required],
           complementoImovel: [response.complementoImovel, Validators.required],
           condominio: [response.condominio],
           tipoImovel: [response.tipoImovel, Validators.required],
@@ -133,7 +133,7 @@ export class ImovelEditComponent implements OnInit {
         if(this.imovelLocalizado.cidade.id){
           console.log(this.imovelLocalizado.cidade.estado.id);
           this.servicoGenerico.getBagCidadeForUF(this.imovelLocalizado.cidade.estado.id).subscribe(response => {
-            this.cidadesUf = response.cidades;
+            this.cidadesUf = response;
           })
         }
       }
@@ -198,27 +198,26 @@ export class ImovelEditComponent implements OnInit {
 
   onSave(formulario: any) {
     if (this.estadoFormulario == "Incluir") {
-      //this.service.postImovel(this.productForm.value).subscribe(response => {
-      //  console.log("Salvar Imovel ", response)
-      //}, error => {
-      //  console.log("Error salvar imovel", error)
-      //})
+      this.service.postImovel(this.productForm.value).subscribe(response => {
+        console.log("Salvar Imovel ", response)
+      }, error => {
+        console.log("Error salvar imovel", error)
+      })
     } else {
-      //this.service.putCurso(this.productForm.value, this.imovelId).subscribe(response => {
-      //  console.log("Salvar Imovel ", response)
-      //}, error => {
-      //  console.log("Error salvar imovel", error)
-      //})
+      console.log("onsave", this.imovelId);
+      this.service.putImovel(this.imovelId, this.productForm.value).subscribe(response => {
+        console.log("Salvar Imovel ", response)
+      }, error => {
+        console.log("Error salvar imovel", error)
+      })
     }
 
     this.dialogRef.close(1);
   }
 
   ufChange(event: any) {
-    console.log("Event........ "+ event.value)
     this.servicoGenerico.getBagCidadeForUF(event.value).subscribe(response => {
-      this.cidadesUf = response.cidades;
-      console.log(response);
+      this.cidadesUf = response;
     })
   }
 
