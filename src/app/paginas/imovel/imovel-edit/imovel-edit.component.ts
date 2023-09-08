@@ -19,7 +19,6 @@ export class ImovelEditComponent implements OnInit {
   imovel: Imovel;
   estadoFormulario: string = "";
   chkCondominio: boolean = false;
-  //endereco: Endereco;
   condomi: Number;
   tiposEdv: any;
   tiposSrv: any;
@@ -36,7 +35,6 @@ export class ImovelEditComponent implements OnInit {
     private servicoGenerico: ServicoGenerico,
     private fb: FormBuilder,
     private service: ImovelService,
-    //private ufService: EstadoService,
     public dialog: MatDialog,
     public dialogP: MatDialog,
     private snackBar: MatSnackBar,
@@ -138,6 +136,47 @@ export class ImovelEditComponent implements OnInit {
         }
       }
       )
+    } else {
+      //console.log("Novo Imóvel")
+      this.productForm = this.fb.group({
+        proprietarioMaster: ["", Validators.required],
+        registro: ["", Validators.required],
+        complementoImovel: ["", Validators.required],
+        condominio: [""],
+        tipoImovel: ["", Validators.required],
+        tipoEdificacao: ["", Validators.required],
+        tipoServico: ["", Validators.required],
+        areaTotal: ["", Validators.required],
+        areaConstruida: ["", Validators.required],
+        banheiros: ["", Validators.required],
+        quartos: ["", Validators.required],
+        suites: ["", Validators.required],
+        comodos: ["", Validators.required],
+        vagas: ["", Validators.required],
+        cep: [""],
+        logradouro: [""],
+        complemento: [""],
+        numero: [""],
+        bairro: [""],
+        cidade: this.fb.group({
+            id: [""],
+            nome: [""],
+            uf: [""],
+          }),
+        //photos: [response.photos, Validators.required],
+        //proprietarios: [response.proprietarios, Validators.required],
+      });
+      this.selectTI = "";
+      this.selectTE = "";
+      this.selectTS = "";
+      this.condomi = Number("0");
+      this.imovelId = "";
+      this.estadoFormulario = "Novo";
+      //if(this.imovelLocalizado.cidade.id){
+      //  this.servicoGenerico.getBagCidadeForUF(this.imovelLocalizado.cidade.estado.id).subscribe(response => {
+      //    this.cidadesUf = response;
+      //  })
+
     }
   }
 
@@ -197,7 +236,7 @@ export class ImovelEditComponent implements OnInit {
   }
 
   onSave(formulario: any) {
-    if (this.estadoFormulario == "Incluir") {
+    if (this.estadoFormulario == "Novo") {
       this.service.postImovel(this.productForm.value).subscribe(response => {
         console.log("Salvar Imovel ", response)
       }, error => {

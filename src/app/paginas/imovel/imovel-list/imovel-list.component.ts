@@ -21,7 +21,7 @@ export class ImovelListComponent implements    OnInit {
 
   ELEMENT_DATA: Imovel[] = [];
 
-  displayedColumns: string[] = ['id', 'endereco', 'numero', 'tipo', 'edificacao', 'servico', 'quartos', 'suites', 'banheiros', 'vagas', 'acoes'];
+  displayedColumns: string[] = ['endereco', 'numero', 'tipo', 'edificacao', 'servico', 'quartos', 'suites', 'banheiros', 'vagas', 'acoes'];
   dataSource = new MatTableDataSource<Imovel>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -48,15 +48,18 @@ export class ImovelListComponent implements    OnInit {
   delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width:'450px',
-      data: {id:id, module: "curso"}
+      data: {module: "exclusão de imóvel"}
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
+      console.log("Exclusão confirmada......", id)
       if(result == 1){
-        this.openSnackBar("Imovel Excluido", "Sucesso");
-        this.ViewInit();
+        this.service.deleteImovel(id).subscribe(() => {
+          this.openSnackBar("Imovel Excluido", "Sucesso");
+          this.ViewInit();
+        });
       } else if (result == 2){
-        this.openSnackBar("Erro ao excluir imovel", "Erro");
+        this.openSnackBar("Exclusão do imóvel cancelada", "Warning");
       }
 
     });
@@ -73,7 +76,7 @@ export class ImovelListComponent implements    OnInit {
   }
 
   openDialog(){
-    /*
+
     const dialogRef = this.dialog.open(ImovelEditComponent, {
       width:'850px',
     });
@@ -90,7 +93,7 @@ export class ImovelListComponent implements    OnInit {
       }
 
     });
-    */
+
   }
 
   edit(id: number){
@@ -99,7 +102,7 @@ export class ImovelListComponent implements    OnInit {
       width:'950px',
       data: id
     });
-/*
+
     dialogRef.afterClosed().subscribe((result:any) => {
 
       if(result == 1){
@@ -112,7 +115,7 @@ export class ImovelListComponent implements    OnInit {
       }
 
     });
-    */
+
   }
 
   dialogProprietario(idProprietario: any){

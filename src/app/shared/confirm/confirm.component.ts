@@ -22,16 +22,11 @@ export class ConfirmComponent implements OnInit {
   }
 
   onNoClick(){
-    this.dialogRef.close(3);
+    this.dialogRef.close(2);
   }
 
   delete(){
-    if(this.data != null){
-
-
-    }else {
-        this.dialogRef.close(2);
-    }
+    this.dialogRef.close(1);
   }
 }
 

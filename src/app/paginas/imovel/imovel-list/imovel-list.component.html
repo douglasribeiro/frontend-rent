@@ -27,11 +27,6 @@
       <table mat-table [dataSource]="dataSource">
 
           <!-- Position Column -->
-          <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-
           <ng-container matColumnDef="endereco">
               <th mat-header-cell *matHeaderCellDef> Endereço </th>
               <td mat-cell *matCellDef="let element"> {{element.logradouro}} </td>
@@ -80,9 +75,6 @@
           <ng-container matColumnDef="acoes">
               <th mat-header-cell *matHeaderCellDef> Açoes </th>
               <td mat-cell *matCellDef="let element">
-                  <button>
-                      <i class="material-icons dehaze" matTooltip="Ver Imóvel">dehaze</i>
-                  </button>
                   <button (click)="edit(element.id)" matTooltip="Alterar Imóvel">
                       <i class="material-icons edit">edit</i>
                   </button>

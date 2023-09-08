@@ -27,13 +27,16 @@ export class ImovelService {
   }
 
   postImovel(imovel: Imovel){
-    return this.httpClient.post<any>(this.imovelURL+"imovel", imovel, this.httpOptions);
+    return this.httpClient.post<any>(this.imovelURL+"imovel/novo", imovel, this.httpOptions);
   }
 
   public putImovel(id: number, imovel: Imovel): Observable<any> {
-    console.log(this.imovelURL + `imovel/${id}`);
-    console.log(imovel);
     return this.httpClient.put<any>(this.imovelURL + `imovel/${id}`, imovel, this.httpOptions);
+  }
+
+  public deleteImovel(id: number): Observable<any> {
+    console.log(this.imovelURL + `imovel/${id}`);
+    return this.httpClient.delete<any>(this.imovelURL + `imovel/${id}`, this.httpOptions)
   }
 
 }
