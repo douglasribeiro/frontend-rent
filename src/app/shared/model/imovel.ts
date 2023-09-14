@@ -6,6 +6,7 @@ import { Cliente } from "./cliente";
 import { Proprietario } from "./proprietario";
 
 export interface Imovel{
+  [x: string]: any;
   id : number,
   proprietarioMaster: String,
   logradouro: String,
@@ -32,7 +33,6 @@ export interface Imovel{
   iptu: String,
   ativo: boolean,
   cliente: Cliente,
-  proprietario: Proprietario[]
-
-
+  proprietario: Proprietario[],
+  pertence: Boolean
 }

@@ -1,7 +1,7 @@
-import { SecurityService } from './../../services/security.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
+import { SecurityService } from 'src/app/shared/services/security.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit  {
     {name: "Home", route: "home", icon:"home"},
     {name: "Categorias", route: "category", icon:"category"},
     {name: "Imóveis", route: "imovel", icon:"account_balance"},
+    {name: "proprietario", route: "proprietario", icon: "face"},
     {name: "Curso", route: "curso", icon:"school"}
   ]
   auth: any;

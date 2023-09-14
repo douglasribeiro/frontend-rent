@@ -1,0 +1,72 @@
+<mat-card>
+
+  <h2 class="alinhar">Lista de Imóveis</h2>
+
+  <mat-card-header>
+      <div>
+          <mat-form-field hintLabel="Pesquisa imóvel" appearance="fill">
+              <mat-label>Pesquisa</mat-label>
+              <input matInput #input (keyup)="buscar($event)">
+          </mat-form-field>
+      </div>
+  </mat-card-header>
+
+  <div mat-card-image></div>
+
+  <mat-card-content>
+      <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+          <ng-container matColumnDef="endereco">
+              <th mat-header-cell *matHeaderCellDef> Endereço </th>
+              <td mat-cell *matCellDef="let element"> {{element.logradouro}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef> Num. </th>
+              <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="servico">
+              <th mat-header-cell *matHeaderCellDef> Serviço </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipoServico}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="+">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-card class="result">
+                  <mat-card-content>
+                    <section class="example-section">
+                      <mat-slide-toggle class="margin" (change)="change($event, element.id)"
+                          [color]="color"
+                          [disabled]="disabled"
+                          [checked]= "element.pertence">
+                      </mat-slide-toggle>
+                    </section>
+                  </mat-card-content>
+                </mat-card>
+              </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+  </mat-card-content>
+  <mat-card-footer>
+    <div>
+      <button style="width:24%;" mat-stroked-button color="primary" (click)="onSave()">Salvar</button>
+      <button style="width:25%;" mat-stroked-button color="primary" (click)="onCancel()">Cancelar</button>
+    </div>
+  </mat-card-footer>
+
+</mat-card>

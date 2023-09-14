@@ -1,0 +1,86 @@
+<h2 mat-dialog-title> {{estadoFormulario}} Proprietario </h2>
+<mat-dialog-content>
+
+    <form [formGroup]="productForm" *ngIf="productForm">
+        <div class="product-container">
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="nome" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>C.P.F</mat-label>
+                <input matInput formControlName="cpf" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:24% !important; padding: 1%">
+                <mat-label>Identidade</mat-label>
+                <input matInput formControlName="ident" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:46% !important; padding: 1%">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:24% !important; padding: 0.5%">
+              <mat-label>Estado Civil</mat-label>
+              <mat-select formControlName="estCivil">
+                  <mat-option *ngFor="let option of tpEstCivil" [value]="option.descr">
+                      {{option.descr}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width:32% !important; padding: 1%">
+              <mat-label>Data Nascimetno</mat-label>
+              <input matInput [matDatepicker]="datepicker" formControlName="dtNasc">
+              <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancela</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Aplica</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field style="width:31% !important; padding: 0.5%">
+                <mat-label>Naturalidade</mat-label>
+                <input matInput formControlName="naturalidade" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:32% !important; padding: 0.5%">
+                <mat-label>Nacionalidade</mat-label>
+                <input matInput formControlName="nacionalidade" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:32% !important; padding: 0.5%">
+              <mat-label>Nome Conjuge</mat-label>
+              <input matInput formControlName="conjuge" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:31% !important; padding: 0.5%">
+              <mat-label>C.P.F. conjuge</mat-label>
+              <input matInput formControlName="cpfConjuge" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:32% !important; padding: 1%">
+              <mat-label>Data Nascimento Conjuge</mat-label>
+              <input matInput [matDatepicker]="dp2" formControlName="dtnConjuge">
+              <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancela</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Aplica</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+
+            <div>
+                <button style="width:24%;" mat-stroked-button color="primary" (click)="onSave(productForm)">Salvar</button>
+                <button style="width:25%;" mat-stroked-button color="primary" (click)="onCancel()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>

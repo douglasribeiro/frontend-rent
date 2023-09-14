@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyDepositService } from 'src/app/services/CurrencyDepositService';
+import { CurrencyDepositService } from 'src/app/shared/services/CurrencyDepositService';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +7,11 @@ import { CurrencyDepositService } from 'src/app/services/CurrencyDepositService'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  
+
   constructor(private service: CurrencyDepositService){}
 
   ngOnInit(): void {
-    
+
   }
 
 }

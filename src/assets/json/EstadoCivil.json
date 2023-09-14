@@ -1,0 +1,9 @@
+[
+  {"id": 1, "descr": "SOLTEIRO"},
+  {"id": 2, "descr": "CASADO"},
+  {"id": 3, "descr": "SEPARADO"},
+  {"id": 4, "descr": "DIVORCIADO"},
+  {"id": 5, "descr": "VIUVO"},
+  {"id": 6, "descr": "AMAZIADO"},
+  {"id": 7, "descr": "OUTROS"}
+]

@@ -6,7 +6,7 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
 import { Cidade } from 'src/app/shared/model/cidade';
 import { Estado } from 'src/app/shared/model/estado';
 import { Imovel } from 'src/app/shared/model/imovel';
-import { ImovelService } from '../imovel.service';
+import { ImovelService } from '../../../shared/services/imovel.service';
 
 @Component({
   selector: 'app-imovel-edit',

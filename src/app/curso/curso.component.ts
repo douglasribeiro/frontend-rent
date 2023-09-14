@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CursoService } from '../services/curso.service';
+import { CursoService } from '../shared/services/curso.service';
 
 @Component({
   selector: 'app-curso',
@@ -7,7 +7,7 @@ import { CursoService } from '../services/curso.service';
   styleUrls: ['./curso.component.css']
 })
 export class CursoComponent implements OnInit{
-  
+
   constructor(private cursoService: CursoService){}
 
   ngOnInit(): void {

@@ -1,0 +1,74 @@
+<mat-card>
+
+  <h2 class="alinhar">Lista de Proprietarios</h2>
+
+  <mat-card-header>
+      <div>
+          <mat-form-field hintLabel="Pesquisa proprietario" appearance="fill">
+              <mat-label>Pesquisa</mat-label>
+              <input matInput #input (keyup)="buscar($event)">
+          </mat-form-field>
+      </div>
+  </mat-card-header>
+
+  <mat-card-header>
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+          <ul fxLayout="row" fxLayoutGap="20px">
+              <li>
+                  <button mat-raised-button color="primary" (click)="openDialog()">Novo Prorprietario</button>
+              </li>
+          </ul>
+      </div>
+  </mat-card-header>
+
+  <div mat-card-image></div>
+
+  <mat-card-content>
+      <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> * </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cpf">
+              <th mat-header-cell *matHeaderCellDef> C.P.F. </th>
+              <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acoes">
+              <th mat-header-cell *matHeaderCellDef> Açoes </th>
+              <td mat-cell *matCellDef="let element">
+                  <button (click)="edit(element.id)" matTooltip="Alterar">
+                      <i class="material-icons edit">edit</i>
+                  </button>
+                  <button (click)="delete(element.id)" matTooltip="Excluir">
+                      <i class="material-icons delete">delete</i>
+                  </button>
+                  <button matTooltip="Imoveis" (click)="dialogImoveis(element, element.id, element.nome)"> <!--[routerLink]="['/proprietario']"-->
+                      <i class="material-icons delete">house</i>
+                  </button>
+                  <button matTooltip="Endereços" (click)="dialogEndereco(element.id)">
+                    <i class="material-icons delete">local_post_office</i>
+                </button>
+
+              </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+  </mat-card-content>
+
+
+</mat-card>

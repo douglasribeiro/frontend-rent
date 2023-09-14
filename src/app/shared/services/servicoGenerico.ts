@@ -11,6 +11,7 @@ import { Observable } from "rxjs";
     urlTipoImovel = 'assets/json/TipoImovel.json';
     urlTipoServico = 'assets/json/TipoServico.json';
     urlEstadosUF = 'assets/json/EstadosUF.json';
+    urlEstCivil = 'assets/json/EstadoCivil.json'
     urlCidades = 'http://localhost:8080/api/generic/cidade';
 
     constructor(private http: HttpClient) { }
@@ -35,7 +36,7 @@ import { Observable } from "rxjs";
       return this.http.get<any>(this.urlCidades + '/'+ uf);
     }
 
-    //getBagCidadeForUfName(uf: String): Observable<any> {
-    //  return this.http.get<any>(this.urlCidades + '/'+ uf);
-   // }
+    getEstadoCivil(): Observable<any> {
+      return this.http.get<any>(this.urlEstCivil);
+    }
   }

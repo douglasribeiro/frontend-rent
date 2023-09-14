@@ -31,12 +31,17 @@ export class ImovelService {
   }
 
   public putImovel(id: number, imovel: Imovel): Observable<any> {
-    return this.httpClient.put<any>(this.imovelURL + `imovel/${id}`, imovel, this.httpOptions);
+    console.log("Passei aqui......", this.imovelURL+`imovel/${id}`, imovel)
+    return this.httpClient.put<any>(this.imovelURL+`imovel/${id}`, imovel, this.httpOptions);
   }
 
   public deleteImovel(id: number): Observable<any> {
     console.log(this.imovelURL + `imovel/${id}`);
     return this.httpClient.delete<any>(this.imovelURL + `imovel/${id}`, this.httpOptions)
+  }
+
+  public getProprietarioImovel(id: Number): Observable<any> {
+    return this.httpClient.get<any>(this.imovelURL+ `imovel/prop/${id}`, this.httpOptions)
   }
 
 }
