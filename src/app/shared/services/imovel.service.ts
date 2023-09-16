@@ -30,7 +30,7 @@ export class ImovelService {
     return this.httpClient.post<any>(this.imovelURL+"imovel/novo", imovel, this.httpOptions);
   }
 
-  public putImovel(id: number, imovel: Imovel): Observable<any> {
+  public putImovel(id: String, imovel: Imovel): Observable<any> {
     console.log("Passei aqui......", this.imovelURL+`imovel/${id}`, imovel)
     return this.httpClient.put<any>(this.imovelURL+`imovel/${id}`, imovel, this.httpOptions);
   }
