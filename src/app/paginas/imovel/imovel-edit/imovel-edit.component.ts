@@ -1,8 +1,16 @@
 import { ServicoGenerico } from './../../../shared/services/servicoGenerico';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import {
+  MatSnackBar,
+  MatSnackBarRef,
+  SimpleSnackBar,
+} from '@angular/material/snack-bar';
 import { Cidade } from 'src/app/shared/model/cidade';
 import { Estado } from 'src/app/shared/model/estado';
 import { Imovel } from 'src/app/shared/model/imovel';
@@ -11,13 +19,12 @@ import { ImovelService } from '../../../shared/services/imovel.service';
 @Component({
   selector: 'app-imovel-edit',
   templateUrl: './imovel-edit.component.html',
-  styleUrls: ['./imovel-edit.component.css']
+  styleUrls: ['./imovel-edit.component.css'],
 })
 export class ImovelEditComponent implements OnInit {
-
   productForm: FormGroup;
   imovel: Imovel;
-  estadoFormulario: string = "";
+  estadoFormulario: string = '';
   chkCondominio: boolean = false;
   condomi: Number;
   tiposEdv: any;
@@ -41,22 +48,21 @@ export class ImovelEditComponent implements OnInit {
     private dialogRef: MatDialogRef<ImovelEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.servicoGenerico.getEstadosUF().subscribe(response =>{
+    this.servicoGenerico.getEstadosUF().subscribe((response) => {
       this.estadosUf = response;
-    })
-    this.servicoGenerico.getTipoImovel().subscribe(response => {
+    });
+    this.servicoGenerico.getTipoImovel().subscribe((response) => {
       this.tiposImv = response;
-    })
+    });
 
-    this.servicoGenerico.getTipoEdificacao().subscribe(response => {
-      this.tiposEdv = response
-
-    })
-    this.servicoGenerico.getTipoServico().subscribe(response => {
+    this.servicoGenerico.getTipoEdificacao().subscribe((response) => {
+      this.tiposEdv = response;
+    });
+    this.servicoGenerico.getTipoServico().subscribe((response) => {
       this.tiposSrv = response;
-    })
+    });
 
-/*
+    /*
     this.estadoFormulario = "Incluir"
     this.productForm = this.fb.group({
       proprietarioMaster: ['Novo', Validators.required],
@@ -92,10 +98,13 @@ export class ImovelEditComponent implements OnInit {
 */
 
     if (data != null) {
-      this.service.getImovelById(data).subscribe(response => {
+      this.service.getImovelById(data).subscribe((response) => {
         this.imovelLocalizado = response;
         this.productForm = this.fb.group({
-          proprietarioMaster: [response.proprietarioMaster, Validators.required],
+          proprietarioMaster: [
+            response.proprietarioMaster,
+            Validators.required,
+          ],
           registro: [response.registro, Validators.required],
           complementoImovel: [response.complementoImovel, Validators.required],
           condominio: [response.condominio],
@@ -115,10 +124,10 @@ export class ImovelEditComponent implements OnInit {
           numero: [response.numero],
           bairro: [response.bairro],
           cidade: this.fb.group({
-              id: [response.cidade.id],
-              nome: [response.cidade.nome],
-              uf: [response.cidade.estado.nome],
-            }),
+            id: [response.cidade.id],
+            nome: [response.cidade.nome],
+            uf: [response.cidade.estado.nome],
+          }),
           //photos: [response.photos, Validators.required],
           //proprietarios: [response.proprietarios, Validators.required],
         });
@@ -127,66 +136,64 @@ export class ImovelEditComponent implements OnInit {
         this.selectTS = response.tipoServico;
         this.condomi = Number(response.condominio);
         this.imovelId = response.id;
-        this.estadoFormulario = "Atualizar";
-        if(this.imovelLocalizado.cidade.id){
+        this.estadoFormulario = 'Atualizar';
+        if (this.imovelLocalizado.cidade.id) {
           console.log(this.imovelLocalizado.cidade.estado.id);
-          this.servicoGenerico.getBagCidadeForUF(this.imovelLocalizado.cidade.estado.id).subscribe(response => {
-            this.cidadesUf = response;
-          })
+          this.servicoGenerico
+            .getBagCidadeForUF(this.imovelLocalizado.cidade.estado.id)
+            .subscribe((response) => {
+              this.cidadesUf = response;
+            });
         }
-      }
-      )
+      });
     } else {
       //console.log("Novo Imóvel")
       this.productForm = this.fb.group({
-        proprietarioMaster: ["", Validators.required],
-        registro: ["", Validators.required],
-        complementoImovel: ["", Validators.required],
-        condominio: [""],
-        tipoImovel: ["", Validators.required],
-        tipoEdificacao: ["", Validators.required],
-        tipoServico: ["", Validators.required],
-        areaTotal: ["", Validators.required],
-        areaConstruida: ["", Validators.required],
-        banheiros: ["", Validators.required],
-        quartos: ["", Validators.required],
-        suites: ["", Validators.required],
-        comodos: ["", Validators.required],
-        vagas: ["", Validators.required],
-        cep: [""],
-        logradouro: [""],
-        complemento: [""],
-        numero: [""],
-        bairro: [""],
+        proprietarioMaster: ['', Validators.required],
+        registro: ['', Validators.required],
+        complementoImovel: ['', Validators.required],
+        condominio: [''],
+        tipoImovel: ['', Validators.required],
+        tipoEdificacao: ['', Validators.required],
+        tipoServico: ['', Validators.required],
+        areaTotal: ['', Validators.required],
+        areaConstruida: ['', Validators.required],
+        banheiros: ['', Validators.required],
+        quartos: ['', Validators.required],
+        suites: ['', Validators.required],
+        comodos: ['', Validators.required],
+        vagas: ['', Validators.required],
+        cep: [''],
+        logradouro: [''],
+        complemento: [''],
+        numero: [''],
+        bairro: [''],
         cidade: this.fb.group({
-            id: [""],
-            nome: [""],
-            uf: [""],
-          }),
+          id: [''],
+          nome: [''],
+          uf: [''],
+        }),
         //photos: [response.photos, Validators.required],
         //proprietarios: [response.proprietarios, Validators.required],
       });
-      this.selectTI = "";
-      this.selectTE = "";
-      this.selectTS = "";
-      this.condomi = Number("0");
-      this.imovelId = "";
-      this.estadoFormulario = "Novo";
+      this.selectTI = '';
+      this.selectTE = '';
+      this.selectTS = '';
+      this.condomi = Number('0');
+      this.imovelId = '';
+      this.estadoFormulario = 'Novo';
       //if(this.imovelLocalizado.cidade.id){
       //  this.servicoGenerico.getBagCidadeForUF(this.imovelLocalizado.cidade.estado.id).subscribe(response => {
       //    this.cidadesUf = response;
       //  })
-
     }
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   openDialogEndereco() {
     var dialogEnd: any;
-    if (this.estadoFormulario != "Incluir") {
+    if (this.estadoFormulario != 'Incluir') {
       //dialogEnd = this.dialog.open(ImovelEnderecoComponent, {
       //  width: '650px',
       //  data: { form: this.productForm.value }
@@ -199,11 +206,10 @@ export class ImovelEditComponent implements OnInit {
     }
     dialogEnd.afterClosed().subscribe((result: any) => {
       if (result == 2) {
-        this.openSnackBar("Edição de Endereço cancelada", "Warning");
+        this.openSnackBar('Edição de Endereço cancelada', 'Warning');
       } else {
         this.productForm = result;
       }
-
     });
   }
 
@@ -211,24 +217,24 @@ export class ImovelEditComponent implements OnInit {
     //const dialogProp = this.dialogP.open(ImovelProprietarioComponent, {
     //  width: '850px',
     //});
-
     //dialogProp.afterClosed().subscribe((result: any) => {
-
-     // if (result == 1) {
-     //   this.openSnackBar("Produto salvo", "Sucesso");
-        //this.ngAfterViewInit;
-     // } else if (result == 2) {
-     //   this.openSnackBar("Erro ao salvar produto", "Erro");
-     // }
-
+    // if (result == 1) {
+    //   this.openSnackBar("Produto salvo", "Sucesso");
+    //this.ngAfterViewInit;
+    // } else if (result == 2) {
+    //   this.openSnackBar("Erro ao salvar produto", "Erro");
+    // }
     //}
     //);
   }
 
-  openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
+  openSnackBar(
+    message: string,
+    action: string
+  ): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {
-      duration: 3000
-    })
+      duration: 3000,
+    });
   }
 
   onCancel() {
@@ -236,28 +242,36 @@ export class ImovelEditComponent implements OnInit {
   }
 
   onSave(formulario: any) {
-    if (this.estadoFormulario == "Novo") {
-      this.service.postImovel(this.productForm.value).subscribe(response => {
-        console.log("Salvar Imovel ", response)
-      }, error => {
-        console.log("Error salvar imovel", error)
-      })
+    if (this.estadoFormulario == 'Novo') {
+      this.service.postImovel(this.productForm.value).subscribe(
+        (response) => {
+          console.log('Salvar Imovel ', response);
+        },
+        (error) => {
+          console.log('Error salvar imovel', error);
+        }
+      );
     } else {
-      console.log("onsave", this.imovelId);
-      this.service.putImovel(this.imovelId, this.productForm.value).subscribe(response => {
-        console.log("Salvar Imovel ", response)
-      }, error => {
-        console.log("Error salvar imovel", error)
-      })
+      console.log('onsave', this.imovelId);
+      this.service.putImovel(this.imovelId, this.productForm.value).subscribe(
+        (response) => {
+          console.log('Salvar Imovel ', response);
+        },
+        (error) => {
+          console.log('Error salvar imovel', error);
+        }
+      );
     }
 
     this.dialogRef.close(1);
   }
 
   ufChange(event: any) {
-    this.servicoGenerico.getBagCidadeForUF(event.value).subscribe(response => {
-      this.cidadesUf = response;
-    })
+    this.servicoGenerico
+      .getBagCidadeForUF(event.value)
+      .subscribe((response) => {
+        this.cidadesUf = response;
+      });
   }
 
   compareObjects(o1: any, o2: any): boolean {
