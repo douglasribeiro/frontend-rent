@@ -49,12 +49,14 @@ export class ImoveisComponent implements OnInit {
 
   ViewInit() {
     this.service.getProprietarioImovel(this.data.id).subscribe((response) => {
+      console.log(response[0]);
       this.pertence(response);
       this.ELEMENT_DATA = response;
       this.dataSource = new MatTableDataSource<Imovel>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
     });
     this.dataSource.paginator = this.paginator;
+    console.log("Antes......", this.ip)
   }
 
   buscar(event: Event) {
@@ -93,9 +95,19 @@ export class ImoveisComponent implements OnInit {
   }
 
   onSave() {
+    debugger
     for (let x = 0; x < this.ip.length; x++) {
       if (this.ip[x].changed) {
-        console.log(this.ip[x]);
+        console.log(this.data.id)
+        if(this.ip[x].pertence){
+          console.log("Inclusão....", this.ip[x]);
+          // persons.splice(persons.findIndex(item => item.firstName === 'William'),1);
+        }else {
+          this.ip.splice(this.ip.findIndex(item => item.proprietario_id === this.ip[x].proprietario_id
+                                          && item.imovel_id === this.ip[x].imovel_id),1)
+          console.log("Depois......", this.ip)
+        }
+        
       }
     }
     this.dialogRef.close(1);

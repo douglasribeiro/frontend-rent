@@ -3,5 +3,6 @@ export enum TipoEdificacao{
   APARTAMENTO = 1,
   GALPAO = 2,
   TERRENO = 3,
-  OUTROS = 4
+  OUTROS = 4,
+  SALÂO = 5
 }

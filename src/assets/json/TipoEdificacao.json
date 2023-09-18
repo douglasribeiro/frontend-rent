@@ -3,5 +3,6 @@
   {"id": 1, "descr": "APARTAMENTO"},
   {"id": 2, "descr": "GALPAO"},
   {"id": 3, "descr": "TERRENO"},
-  {"id": 4, "descr": "OUTROS"}
+  {"id": 4, "descr": "OUTROS"},
+  {"id": 5, "descr": "SALÃO"}
 ]
