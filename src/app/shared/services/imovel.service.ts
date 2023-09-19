@@ -31,12 +31,10 @@ export class ImovelService {
   }
 
   public putImovel(id: String, imovel: Imovel): Observable<any> {
-    console.log("Passei aqui......", this.imovelURL+`imovel/${id}`, imovel)
     return this.httpClient.put<any>(this.imovelURL+`imovel/${id}`, imovel, this.httpOptions);
   }
 
   public deleteImovel(id: number): Observable<any> {
-    console.log(this.imovelURL + `imovel/${id}`);
     return this.httpClient.delete<any>(this.imovelURL + `imovel/${id}`, this.httpOptions)
   }
 

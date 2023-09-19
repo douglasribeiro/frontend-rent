@@ -1,3 +1,4 @@
+import { ImovelProprietario, ImovelProprietarioId } from './../../../shared/model/imovelProprietario';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {
@@ -15,6 +16,7 @@ import {
 import { ImovelService } from '../../../shared/services/imovel.service';
 import { ListComponent } from './list/list.component';
 import { ThemePalette } from '@angular/material/core';
+import { Proprietario } from 'src/app/shared/model/proprietario';
 
 @Component({
   selector: 'app-imoveis',
@@ -26,6 +28,7 @@ export class ImoveisComponent implements OnInit {
   checked = true;
   disabled = false;
   mvl: Imovel;
+  imovelProprietario: ImovelProprietario;
 
   constructor(
     private service: ImovelService,
@@ -49,14 +52,12 @@ export class ImoveisComponent implements OnInit {
 
   ViewInit() {
     this.service.getProprietarioImovel(this.data.id).subscribe((response) => {
-      console.log(response[0]);
       this.pertence(response);
       this.ELEMENT_DATA = response;
       this.dataSource = new MatTableDataSource<Imovel>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
     });
     this.dataSource.paginator = this.paginator;
-    console.log("Antes......", this.ip)
   }
 
   buscar(event: Event) {
@@ -76,10 +77,13 @@ export class ImoveisComponent implements OnInit {
   pertence(obj: any) {
     for (let index = 0; index < obj.length; index++) {
       this.ip.push(obj[index]);
-      if (obj[index].proprietario_id) {
-        this.ip[index].pertence = true;
+      for(let x = 0; x < obj[index].proprietarios.length; x++){
+        if (obj[index].proprietarios[x].id === this.data.id) {
+          this.ip[index].pertence = true;
+        }
       }
     }
+    //console.log(this.ip.sort((a,b) => Number(a.pertence) - Number(b.pertence)))
   }
 
   change(event: any, element: any) {
@@ -95,19 +99,34 @@ export class ImoveisComponent implements OnInit {
   }
 
   onSave() {
-    debugger
     for (let x = 0; x < this.ip.length; x++) {
       if (this.ip[x].changed) {
-        console.log(this.data.id)
         if(this.ip[x].pertence){
-          console.log("Inclusão....", this.ip[x]);
-          // persons.splice(persons.findIndex(item => item.firstName === 'William'),1);
+          this.ip[x].proprietario_id = this.data.id;
+          this.ip[x].imovel_id = this.ip[x].id
+
+          let modImovel: Imovel = {} as Imovel;
+          let modProprietario: Proprietario = {} as Proprietario;
+          let modal: ImovelProprietarioId = {} as ImovelProprietarioId;
+
+          modImovel.id = this.ip[x].id;
+          modProprietario.id = this.data.id;
+          modal.imovel = modImovel;
+          modal.proprietario = modProprietario;
+
+          this.ip[x]['proprietarios'].push(modProprietario);
+
+          this.service.putImovel(this.ip[x].imovel_id.toString() , this.ip[x]).subscribe(response => {
+            console.log("Sucesso....")
+          }, error => console.log("Falha...."))
         }else {
-          this.ip.splice(this.ip.findIndex(item => item.proprietario_id === this.ip[x].proprietario_id
-                                          && item.imovel_id === this.ip[x].imovel_id),1)
-          console.log("Depois......", this.ip)
+          this.ip[x]['proprietarios'].splice(this.ip[x]['proprietarios'].findIndex(item => item.id == this.data.id),1);
+          this.ip[x].proprietario_id = null;
+          this.ip[x].imovel_id = null;
+          this.service.putImovel(this.ip[x].id.toString() , this.ip[x]).subscribe(response => {
+            console.log("Sucesso....")
+          }, error => console.log("Falha...."))
         }
-        
       }
     }
     this.dialogRef.close(1);

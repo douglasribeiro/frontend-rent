@@ -3,6 +3,7 @@ import { TipoImovel } from "../enums/tipoImovel";
 import { TipoServico } from "../enums/tipoServico";
 import { Cidade } from "./cidade";
 import { Cliente } from "./cliente";
+import { ImovelProprietario, ImovelProprietarioId } from "./imovelProprietario";
 import { Proprietario } from "./proprietario";
 
 export interface Imovel{
@@ -38,4 +39,5 @@ export interface Imovel{
   proprietario: Proprietario[];
   pertence: Boolean;
   changed: boolean;
+  imovelProrietarioList: ImovelProprietarioId[];
 }
