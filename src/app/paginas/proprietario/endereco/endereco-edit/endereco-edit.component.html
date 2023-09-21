@@ -1,0 +1,75 @@
+<h2 mat-dialog-title> Endereço </h2>
+<mat-dialog-content>
+
+    <form [formGroup]="enderForm" *ngIf="enderForm">
+        <div class="product-container">
+
+            <mat-form-field style="width:25% !important; padding: 1%">
+                <mat-label>C.E.P.</mat-label>
+                <input [(ngModel)]="consulta" matInput formControlName="cep" (blur)="consultaCep()" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Logradouro</mat-label>
+                <input matInput formControlName="logradouro" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:20% !important; padding: 1%">
+                <mat-label>Numero</mat-label>
+                <input matInput formControlName="numero" required />
+            </mat-form-field>
+
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Complemento do Endereço</mat-label>
+                <input matInput formControlName="complemento" required />
+            </mat-form-field>
+
+            <mat-form-field style="width:48% !important; padding: 1%">
+                <mat-label>Bairro</mat-label>
+                <input matInput formControlName="bairro" required />
+            </mat-form-field>
+
+            <div formGroupName="cidade">
+
+                <mat-form-field style="width:48% !important; padding: 1%">
+                    <mat-label>Estado</mat-label>
+
+                    <mat-select [compareWith]="compareObjects" formControlName="uf" (selectionChange)="ufChange($event)">
+                        <mat-option  *ngFor="let select of estadosUf" [value]="select.descr">
+                            {{select.descr}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width:48% !important; padding: 1%">
+                    <mat-label>Cidades</mat-label>
+                    <mat-select [compareWith]="compareObjects" formControlName="id">
+                        <mat-option *ngFor="let option of cidadesUf" [value]="option.id">
+                            {{option.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <mat-form-field style="width:22% !important; padding: 1%">
+              <mat-label>Tipo Endereço</mat-label>
+
+              <mat-select formControlName="tipoEndereco">
+                  <mat-option  *ngFor="let select of tpEnders" [value]="select.descr">
+                      {{select.descr}}
+                  </mat-option>
+              </mat-select>
+
+            </mat-form-field>
+
+            <div>
+                <button style="width:24%;" mat-stroked-button color="primary" (click)="onSave()">Salvar</button>
+                <button style="width:25%;" mat-stroked-button color="primary" (click)="onCancel()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>

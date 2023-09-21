@@ -35,7 +35,6 @@ export class ProprietarioListComponent {
 
   ViewInit() {
     this.service.getListProrpietario().subscribe(response => {
-     // console.log(response);
       this.ELEMENT_DATA = response;
       this.dataSource = new MatTableDataSource<Proprietario>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
@@ -121,11 +120,12 @@ export class ProprietarioListComponent {
 
   }
 
-  dialogEndereco(idProprietario: any){
+  dialogEndereco(proprietario: any, nomeProrpietario: any){
+    //console.log("Prrrrietario. " + proprietario )
     const dialogRef = this.dialog.open(EnderecoComponent, {
-      width:'1250px',
-      height: '450px',
-      data: {id:idProprietario}
+      width:'80%',
+      height: '90%',
+      data: {proprietario: proprietario, nome: nomeProrpietario}
     });
 
   }

@@ -1,0 +1,7 @@
+[
+  {"id": 0, "descr": "Residencial"},
+  {"id": 1, "descr": "Comercial"},
+  {"id": 2, "descr": "Entrega"},
+  {"id": 3, "descr": "Correspondencia"},
+  {"id": 4, "descr": "Outros"}
+]

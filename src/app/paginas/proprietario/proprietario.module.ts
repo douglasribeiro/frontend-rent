@@ -9,6 +9,7 @@ import { ProprietarioRoutingModule } from './proprietario-routing.module';
 import { EnderecoComponent } from './endereco/endereco.component';
 import { ImoveisComponent } from './imoveis/imoveis.component';
 import { ListComponent } from './imoveis/list/list.component';
+import { EnderecoEditComponent } from './endereco/endereco-edit/endereco-edit.component';
 
 
 
@@ -18,7 +19,8 @@ import { ListComponent } from './imoveis/list/list.component';
     ProprietarioEditComponent,
     EnderecoComponent,
     ImoveisComponent,
-    ListComponent
+    ListComponent,
+    EnderecoEditComponent
   ],
   imports: [
     CommonModule,

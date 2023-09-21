@@ -11,16 +11,6 @@
       </div>
   </mat-card-header>
 
-  <mat-card-header>
-      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-          <ul fxLayout="row" fxLayoutGap="20px">
-              <li>
-                  <button mat-raised-button color="primary" (click)="openDialog()">Novo Prorprietario</button>
-              </li>
-          </ul>
-      </div>
-  </mat-card-header>
-
   <div mat-card-image></div>
 
   <mat-card-content>
@@ -54,7 +44,7 @@
                   <button matTooltip="Imoveis" (click)="dialogImoveis(element, element.id, element.nome)"> <!--[routerLink]="['/proprietario']"-->
                       <i class="material-icons delete">house</i>
                   </button>
-                  <button matTooltip="Endereços" (click)="dialogEndereco(element.id)">
+                  <button matTooltip="Endereços" (click)="dialogEndereco(element, element.nome)">
                     <i class="material-icons delete">local_post_office</i>
                 </button>
 
@@ -70,5 +60,9 @@
       </mat-paginator>
   </mat-card-content>
 
+  <mat-card-footer style="padding-left: 10px; padding-bottom: 10px;">
+    <button mat-raised-button color="primary" (click)="openDialog()" style="width:48% !important; padding: 1%">Novo Proprietario</button>
+
+</mat-card-footer>
 
 </mat-card>

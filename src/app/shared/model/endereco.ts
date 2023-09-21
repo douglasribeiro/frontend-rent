@@ -1,4 +1,6 @@
+import { TipoEndereco } from "../enums/tipoEndereco";
 import { Cidade } from "./cidade";
+import { Proprietario } from "./proprietario";
 
 export interface Endereco {
 
@@ -6,8 +8,9 @@ export interface Endereco {
   cep: String,
   logradouro: String,
   numero: String,
-  pontoRef: String,
+  complemento: String,
   bairro: String,
-  cidade: Cidade
+  cidade: Cidade,
+  tipoEndereco: TipoEndereco
 
 }

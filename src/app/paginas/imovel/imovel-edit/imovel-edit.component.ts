@@ -23,7 +23,7 @@ import { ImovelService } from '../../../shared/services/imovel.service';
 })
 export class ImovelEditComponent implements OnInit {
   productForm: FormGroup;
-  imovel: Imovel;
+  iovmel: Imovel;
   estadoFormulario: string = '';
   chkCondominio: boolean = false;
   condomi: Number;

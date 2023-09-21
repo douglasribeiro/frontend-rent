@@ -22,7 +22,7 @@ export class ProprietarioService {
     return this.httpClient.get<any>(this.proprietarioURL + "/client-ativo/", this.httpOptions);
   }
 
-  getProrpietarioById(xval: String): Observable<Proprietario>{
+  getProrpietarioById(xval: String): Observable<any>{
     return this.httpClient.get<any>(this.proprietarioURL + "/" + xval, this.httpOptions);
   }
 
@@ -35,7 +35,6 @@ export class ProprietarioService {
   }
 
   public deleteProrpietario(id: number): Observable<any> {
-    console.log(this.proprietarioURL + `${id}`);
     return this.httpClient.delete<any>(this.proprietarioURL + `/${id}`, this.httpOptions)
   }
 
