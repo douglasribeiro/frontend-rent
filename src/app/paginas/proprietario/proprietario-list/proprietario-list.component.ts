@@ -38,6 +38,10 @@ export class ProprietarioListComponent {
       this.ELEMENT_DATA = response;
       this.dataSource = new MatTableDataSource<Proprietario>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+    }, error => {
+      if(error.status == 503) {
+        this.openSnackBar("Serviço de proprietarios naõ esta no ar, tente novamente mais tarde.", "Error");
+      }
     })
     this.dataSource.paginator = this.paginator;
   }
@@ -50,15 +54,15 @@ export class ProprietarioListComponent {
   delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width:'450px',
-      data: {module: "exclusão de imóvel"}
+      data: {module: "exclusão de proprietarios"}
     });
-
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log("Exclusão confirmada......", id)
       if(result == 1){
         this.service.deleteProrpietario(id).subscribe(() => {
           this.openSnackBar("Proprietario Excluido", "Sucesso");
           this.ViewInit();
+        }, error => {
+          this.openSnackBar("Proprietario não pode ser excluido", "Warning");
         });
       } else if (result == 2){
         this.openSnackBar("Exclusão de proprietario cancelada", "Warning");

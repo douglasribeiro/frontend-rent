@@ -12,6 +12,7 @@ import { EnderecoEditComponent } from './endereco-edit/endereco-edit.component';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { ProprietarioListComponent } from '../proprietario-list/proprietario-list.component';
 import { Proprietario } from 'src/app/shared/model/proprietario';
+import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-endereco',
@@ -76,23 +77,6 @@ export class EnderecoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       this.save(result);
-      /*
-      if(result == 1){
-        this.service.putProrpietario(this.data.proprietario.id, this.data.proprietario).subscribe(result => {
-          console.log(this.data.proprietario);
-          console.log("Endereço Ok.");
-          this.ngOnInit();
-        }, error => console.log("Erro endereço."))
-
-        //this.ViewInit();
-      } else if (result == 2){
-        //this.openSnackBar("Erro ao salvar proprietario", "Erro");
-        console.log("Endereço Erro.")
-      } else {
-        //this.openSnackBar("Operação cancelada", "Warning");
-        console.log("Endereço ??????")
-      }
-      */
     });
   }
 
@@ -104,6 +88,29 @@ export class EnderecoComponent implements OnInit {
     } else if (result == 2) {
       this.openSnackBar("Erro ao salvar proprietario", "Erro");
     }
+  }
+
+  delete(id: any){
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width:'450px',
+      data: {module: "exclusão de endereço"}
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.proprietario.enderecos.splice(this.proprietario.enderecos.findIndex(item => item.id == id),1);
+        this.data.proprietario.enderecos = this.proprietario.enderecos;
+        this.service.putProrpietario(this.data.proprietario.id, this.data.proprietario).subscribe(result => {
+          this.ngOnInit();
+          this.openSnackBar("Proprietario Excluido", "Sucesso");
+        }, error => console.log("Erro endereço."))
+      } else if (result == 2){
+        this.openSnackBar("Erro ao excluir endereço", "Erro");
+      } else {
+        this.openSnackBar("Operação cancelada", "Warning");
+        console.log("Endereço ??????")
+      }
+    });
   }
 
   onCancel() {

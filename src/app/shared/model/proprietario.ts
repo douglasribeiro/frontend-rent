@@ -18,6 +18,6 @@ export interface Proprietario{
     cpfConjuge: String,
     dtnConjuge: Date,
     cliente: Cliente,
-    endereco: Endereco[],
+    enderecos: Endereco[],
     imovel: Imovel[]
 }
